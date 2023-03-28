@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Login To Upes</title>
+    <title>LOGIN TO MENTOR SLOT Booking</title>
     
     
     <style>
@@ -23,6 +23,7 @@
         padding: 4rem;
         border-radius: 1rem;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin: 0px auto;
       }
 
       h1 { 
@@ -42,47 +43,56 @@
         margin-bottom: 0.4rem;
       }
 
-      input[type="text"],
-      input[type="password"] {
+      input[type="text"] {
         color: rgb(8, 5, 5);
         padding: 0.5rem;
         margin-bottom: 1rem;
         border-radius: 0.25rem;
         border: none;
         width: 100%;
+        box-shadow: 1px 0.2px 0.5px #d4d1d1;
+      }
+
+      input[type="password"] {
+        color: rgb(8, 5, 5);
+        padding: 0.5rem;
+        margin-bottom: 1.2rem;
+        border-radius: 0.25rem;
+        border: none;
+        width: 100%;
+        box-shadow: 1px 0.2px 0.5px #d4d1d1;
       }
 
       input[type="submit"] {
-        background-color: rgb(30, 2, 95);
+        background-color: rgb(35, 28, 113);
         color: #e4e5e9;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.25rem;
+        padding: 0.75rem 5.5rem;
+        border-radius: 1.25rem;
         border: none;
         cursor: pointer;
+        box-shadow: 0px 0px 0.5px #888888;
       }
-
-     
     </style>
   </head>
   
   <body>
     <div class="form-container">
-      <img src="https://myupes.upes.ac.in/Content/img/login-logo.PNG">
-    
+      <img src="https://s3.amazonaws.com/upes-prod/media/7545/upes-logo.webp" style="max-height: 80px;"/>    
       <h1>Login To Slot Booking</h1>
       <form>
         <label for="username">User ID:</label>
-        <input type="text" id="username" placeholder="Email ID" name="username">
+        <input type="text" id="username" placeholder="Email ID" name="username" required>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="password" name="password">
+        <input type="password" id="password" placeholder="password" name="password" required>
 
         <input type="submit" value="LOGIN TO UPES"> 
 
-        <label> <p><u> Create a account</u></p> </label>
-        
+        <label> <p><u>Create a account</u></p> </label>     
     </div>
+
   </body>
-  <img src="/pImage/Mentorpig.png">
+  
+  <img src="\Icons\Mentorpig.png">
 </html>
 

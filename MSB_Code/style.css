@@ -1,0 +1,163 @@
+* {
+	box-sizing: border-box;
+}
+
+
+
+.tab {
+	font-weight: bold;
+	margin: auto;
+	width: 35%;
+	text-align: center;
+}
+
+.tab tr {
+	border: 1px rgb(247, 243, 243) hidden;
+	border-radius: 10px;
+	background-color: #fbf5f5;
+	font-size: 22px;
+	float: left;
+	padding-left: 17%;
+	padding-bottom: 5px;
+	padding-top: 2px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+a:hover {
+	color: rgb(255, 253, 253);
+}
+
+
+a:link {
+	color: #fcf8f8;
+	text-decoration: none;
+}
+
+header nav li :hover {
+	border-bottom: 2px #faf8f8 solid;
+	border-radius: 10px;
+	color: #f8f5f5;
+	padding-bottom: 2px;
+}
+
+header nav li {
+	display: table;
+	height: 80%;
+	float: left;
+	margin-right: 20px;
+	padding-left: 10px;
+
+}
+
+header nav a {
+	color: #f9f5f5;
+	;
+}
+
+
+
+
+
+
+
+
+.profile {
+	background-color: #f7f7f7;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	text-align: center;
+}
+
+.profile-image {
+	margin-right: 80px;
+}
+
+.profile-image img {
+	border-radius: 50%;
+	max-width: 450px;
+}
+
+.profile-content {
+	text-align: left;
+}
+
+.profile h2 {
+	margin-top: 0;
+}
+
+.profile p {
+	margin: 10px 0;
+}
+
+footer {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+
+.thin-line {
+	border: none;
+	border-top: 1px solid #fff;
+	margin: 10px 0;
+}
+
+
+
+
+
+
+
+
+body {
+	background-color: #f2f2f2;
+	font-family: Arial, sans-serif;
+}
+
+.signup-form {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 20px;
+	margin: 50px auto;
+	max-width: 400px;
+	text-align: center;
+}
+
+.signup-form h2 {
+	margin-top: 0;
+}
+
+.signup-form label {
+	display: block;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+.signup-form input {
+	padding: 10px;
+	margin-bottom: 20px;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.signup-form button {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.signup-form button:hover {
+	background-color: #3e8e41;
+}
+
+
