@@ -16,7 +16,7 @@
 .container {
 	max-width: 600px;
 	margin: 50px auto;
-	background-color: #fff;
+	background-color: #fdfcfc;
 	padding: 30px;
 	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 	border-radius: 5px;
@@ -63,6 +63,9 @@ input[type="submit"] {
 </style>
 <body>
 	<div class="container">
+		<form action="#" method="post">
+			{% csrf_token %}
+			{% load static %}
 		<h1>Student Signup</h1>
 		<form action="#" method="post">
 			<label for="name">Name:</label>
