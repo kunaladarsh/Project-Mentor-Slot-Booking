@@ -1,13 +1,14 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Project Mentor Slot Booking</title>
+	<title>{{title}}</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/MentorSlotBooking/static/style.css">
-	<link rel="stylesheet" type="text/css" href="/MentorSlotBooking/static/style.css">
+	<link rel="stylesheet" href="/static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
    
 </head>
 <body onload="funload()">
+	
 	<header>
 		<nav class="navbar navbar-expand-sm bg-secondary navbar-secondary">
 			<a class="navbar-brand">
@@ -38,16 +39,20 @@
         
     <main>
         <section class="profile">
+			
 			<div class="profile-image">
-				<img src="/MentorSlotBooking/static/Icons/shiva.JPG" alt="Profile picture">
+				
+				<img src="/static/Icons/shiva.JPG" alt="Profile picture">
 			</div>
 			<div class="profile-content">
-				<h4><b>Shiva Shukla</b></h4>
+				<center><h5><b>Student Info</h5></b></center>
+				<h4><strong>Name.:</strong>{{Name}}</h4>
 				<p><strong>Roll No.:</strong> R214220198</p>
-				<p><strong>School of Department:</strong> Computer Science</p>
+				<p><strong>Sap Id.:</strong> {{id}}</p>
+				<p><strong>School of Department:</strong>{{sod}}</p>
 				<p><strong>Batch:</strong> 2020-2024</p>
 				<p><strong>Current Study Year:</strong> 3rd year</p>
-				<p><strong>Project Title:</strong> Slot Booking using HTML, CSS, JS</p>
+				<p><strong>Project Title:</strong> {{proj}}</p>
 				<p><strong>Total Projects Done Previously:</strong> 2</p>
 				<p><strong>Current Project Title:</strong> Slot Booking using HTML, CSS, JS</p>
 				<p><strong>Project Mentor:</strong> Vidyanand Sir </p>

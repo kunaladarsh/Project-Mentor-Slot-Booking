@@ -18,7 +18,7 @@
       }
 
       .form-container {
-        background-color: #eff0f3;
+        background-color: #f7f8fb;
         padding: 4rem;
         border-radius: 1rem;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -76,11 +76,14 @@
  
   <body><center>
     <div class="form-container">
+      <form action="#" method="POST">
+        {% csrf_token %}
+        {% load static %}
       <img src="https://s3.amazonaws.com/upes-prod/media/7545/upes-logo.webp" style="max-height: 80px;"/>    
       <h1>Login To Slot Booking</h1>
       <form>
         <label for="username">User ID:</label>
-        <input type="text" id="username" placeholder="Email ID" name="username" required>
+        <input type="text" id="username" placeholder="Email ID" name="sapid" required>
 
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="password" name="password" required>
@@ -94,7 +97,7 @@
 </center>
   <body>
     <div class="SecContainer">
-      <img src="/MentorSlotBooking/static/Icons/Mentorpic.png" style="max-height: 575px; border-radius:12px; box-shadow: 1px 0.2px 0.5px #d4d1d1;"/>
+      <img src="/static/Icons/loginPic.png" style="max-height: 575px; border-radius:12px;"/>
     </div>
   </body>
   </center>
