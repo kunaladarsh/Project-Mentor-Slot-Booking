@@ -7,14 +7,17 @@ sapid=''
 roll=''
 dept=''
 proj=''
-group1=''
+semester=''
+pyear=''
+tproject=''
 contact=''
+mentorn=''
 password=''
 cpassword=''
 
 # Create your views here.
 def signupaction(request):
-    global name, sapid, roll, dept, proj, group1, contact, password, cpassword
+    global name, sapid, roll, dept, proj,semester,pyear,tproject,contact,mentorn, password, cpassword
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -26,18 +29,26 @@ def signupaction(request):
                 sapid=value
             if key =="rollno":
                 roll=value
+            if key=="dept":
+                dept=value
+            if key =="semester":
+                semester=value
+            if key =="pyear":
+                pyear=value
+            if key =="tproject":
+                tproject=value                
             if key =="project":
                 proj=value
-            if key=="group":
-                group1=value
             if key == "contact":
-                contact=value
+                contact=value            
+            if key == "mentorn":
+                mentorn=value
             if key =="password":
                 password=value
             if key =="confirmpassword":
                 cpassword=value
    
-        c = "insert into signup1 values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(name, sapid, roll, dept, proj, group1, contact, password, cpassword)
+        c = "insert into signup1 values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}', '{}', '{}')".format( name, sapid, roll, dept, proj, semester, pyear, tproject, contact, mentorn, password, cpassword)
         cursor.execute(c)
         m.commit()
     return render(request, 'signup_page.html')
@@ -59,10 +70,6 @@ def loginaction(request):
         c = "select * from Signup1 where sapid='{}' and password='{}'".format(sapid, password)
         cursor.execute(c)
         t=tuple(cursor.fetchall())
-        print(type(t[0]))
-        print(t[0][0])
-        print("hello")
-
         if t ==():
             return render(request, 'error.html')       
         else:
