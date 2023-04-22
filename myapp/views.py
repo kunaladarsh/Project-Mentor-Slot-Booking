@@ -70,8 +70,8 @@ def loginaction(request):
                 'title':'Project Mentor Slot Booking',
                 'Name': t[0][0],
                 'id': sapid,
-                'sod': t[0][4],
-                'projtil': t[0][3],
+                'dept': t[0][3],
+                'projtil': t[0][4],
                 
             }
             print(dict(data))
