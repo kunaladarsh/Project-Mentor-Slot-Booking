@@ -19,6 +19,8 @@ from django.urls import path
 from myapp.views import loginaction
 from myapp.views import signupaction
 from myapp.views import editaction
+from myapp.views import senddetails
+
 
 
 urlpatterns = [
@@ -26,5 +28,7 @@ urlpatterns = [
     path('',loginaction, name='home'),
     path('signup/', signupaction),
     path('editProfile/', editaction),
+    path('senddetails/', senddetails),
+
     
 ]

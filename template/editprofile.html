@@ -3,7 +3,6 @@
 	<meta charset="ISO-8859-1">
 	<title>{{title}}</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
   <link rel="stylesheet" href="/static/script.js">
   <script>
@@ -162,11 +161,8 @@ h5 {
 		</nav>
 	</header>
     <br>
-
-    <main>
         
-    <main>
-      
+    <main>      
       <section class="profile11">
         <form action="#" method="post">
           {% csrf_token %}
@@ -183,16 +179,16 @@ h5 {
           <td>
               <center>
               <label for="name1"><b>Name:</b></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <input type="text" id="name1" name="name1" value="name1"><br><br>
+              <input type="text" id="name1" name="name1" value={{Name}}><br><br>
       
-              <label for="rollno"><b>Roll Number:</b></label>&nbsp&nbsp
-               <input type="text" id="rollno" name="rollno" value=""><br><br>
+              <label for="rollno1"><b>Roll Number:</b></label>&nbsp&nbsp
+               <input type="text" id="rollno1" name="rollno1" value=""><br><br>
       
-               <label for="dept"><b>Department:</b></label>&nbsp&nbsp
-               <input type="text" id="dept" name="dept" value=""><br><br>
+               <label for="dept1"><b>Department:</b></label>&nbsp&nbsp
+               <input type="text" id="dept1" name="dept1" value=""><br><br>
 
-               <label for="dept"><b>Current Sem:</b></label>&nbsp&nbsp
-                <input type="text" id="semester" name="semester" value=""><br><br>
+               <label for="semester1"><b>Current Sem:</b></label>&nbsp&nbsp
+                <input type="text" id="semester1" name="semester1" value=""><br><br>
               </center>
           </td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -223,23 +219,23 @@ h5 {
   
             <td>
                 <center>
-                  <label for="projtitle"><b>Project Title:</label>&nbsp&nbsp
-                  <input type="text" id="projtitle" name="projtitle" value=""><br><br>
+                  <label for="projtitle1"><b>Project Title:</label>&nbsp&nbsp
+                  <input type="text" id="projtitle1" name="projtitle1" value=""><br><br>
 
-                  <label for="mentor">Mentor Name:</label>&nbsp&nbsp
-                  <input type="text" id="mentor" name="mentor" value=""><br><br>
+                  <label for="mentor1">Mentor Name:</label>&nbsp&nbsp
+                  <input type="text" id="mentor1" name="mentor1" value=""><br><br>
 
                   
                  </center>
                  <center>
-                  <label for="ProjectDone">Project Done:</label>&nbsp&nbsp
-                  <input type="text" id="mentor" name="mentor" value=""><br><br>
+                  <label for="ProjectDone1">Project Done:</label>&nbsp&nbsp
+                  <input type="text" id="ProjectDone1" name="ProjectDone1" value=""><br><br>
 
-                  <label for="passyear">Passing Year:</label>&nbsp&nbsp
-                  <input type="text" id="passyear" name="passyear" value=""><br><br>
+                  <label for="passyear1">Passing Year:</label>&nbsp&nbsp
+                  <input type="text" id="passyear1" name="passyear1" value=""><br><br>
 
-                  <label for="ContactNo">Contact No:</label>&nbsp&nbsp
-                  <input type="text" id="mentor" name="mentor" value=""><br><br>
+                  <label for="contactNo1">Contact No:</label>&nbsp&nbsp
+                  <input type="text" id="contactNo1" name="contactNo1" value=""><br><br>
                  </center>
                   
                   
@@ -258,7 +254,7 @@ h5 {
 			</div>
     </center>
 
-    <br><br>
+    <br>
     <center>
 			<div class="profile" style="background-color:#f4f6e0;">
         <br>
@@ -271,7 +267,7 @@ h5 {
             <td>
                 <center>
                   <br>
-                  <input type="text1" id="mentor" name="mentor" value=""><br><br>
+                  <input type="text1" id="password1" name="password1" value=""><br><br>
                  </center>
                   
                   
@@ -291,6 +287,5 @@ h5 {
     </center>
 		</section>
     </main>
-    <br>
 </body>
 </html>

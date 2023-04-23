@@ -12,7 +12,6 @@ if (usernameInput.value === '' || passwordInput.value === '') {
 });
 
 
-
 function msgpers() {
   alert("Personal Details Update Succesfull");
 }

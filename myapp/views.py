@@ -1,6 +1,12 @@
 from django.shortcuts import render
 import mysql.connector as sql
 from django.http import HttpResponse
+from datetime import datetime
+from datetime import date
+current_date1 = date.today()
+
+now = datetime.now()
+current_time1 = now.strftime("%H:%M:%S")
 
 name =''
 sapid=''
@@ -93,7 +99,7 @@ def loginaction(request):
 
 
 def editaction(request):
-    global name1, sapid
+    global name1, sapid, rollno1, dept1, semester1, passyear1, ProjectDone1, projtitle1, contactNo1, password1
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -101,9 +107,96 @@ def editaction(request):
         for key,value in d.items():
             if key=="name1":
                 name1=value
-               
-        c = "update signup1 set name='"+name1+"' where sapid='"+sapid+"'"
-        print(c)
+            if key =="rollno1":
+                rollno1=value
+            if key=="dept1":
+                dept1=value
+            if key =="semester1":
+                semester1=value
+            if key =="passyear1":
+                passyear1=value
+            if key =="ProjectDone1":
+                ProjectDone1=value                
+            if key =="projtitle1":
+                projtitle1=value
+            if key == "contactNo1":
+                contactNo1=value            
+            if key == "mentor1":
+                mentor1=value
+            if key =="password1":
+                password1=value
+
+        if name1 !="":
+            c = "update signup1 set name='"+name1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if rollno1 !="":
+            c = "update signup1 set roll='"+rollno1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if dept1 !="":
+            c = "update signup1 set dept='"+dept1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if semester1 !="":
+            c = "update signup1 set semester='"+semester1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if passyear1 !="":
+            c = "update signup1 set pyear='"+passyear1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if ProjectDone1 !="":
+            c = "update signup1 set tproject='"+ProjectDone1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if contactNo1 !="":
+            c = "update signup1 set contact='"+contactNo1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if mentor1 !="":
+            c = "update signup1 set mentorn='"+mentor1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if password1 !="":
+            c = "update signup1 set password='"+password1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+        if projtitle1 !="":
+            c = "update signup1 set proj='"+projtitle1+"' where sapid='"+sapid+"'"
+            cursor.execute(c)
+            m.commit()
+
+    return render(request, 'editprofile.html')
+
+
+
+
+def senddetails(request):
+    global FEmailid, projecttitle, message, member1, member2, member3, member4, member5, Ctime;
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key=="FEmailid":
+                FEmailid=value
+            if key == "projecttitle":
+                projecttitle=value
+            if key =="message":
+                message=value
+            if key =="member1":
+                member1=value
+            if key =="member2":
+                member2=value
+            if key =="member3":
+                member3=value
+            if key =="member4":
+                member4=value
+            if key =="member5":
+                member5=value
+            
+        c = "insert into slotbooking values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
         cursor.execute(c)
         m.commit()
-    return render(request, 'editprofile.html')
+    return render(request, 'sendDetails.html')

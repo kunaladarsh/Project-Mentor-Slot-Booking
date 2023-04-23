@@ -3,11 +3,7 @@
 <head>
 	<title>Student Signup</title>
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
-	<script>
-        function msg() {
-            alert("SignUp Successful");
-        }
-    </script>
+	<script src="/static/sign.js"></script>
 </head>
 <style>
 	body {
@@ -127,14 +123,15 @@ input[type="submit"] {
 
 
 
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" placeholder="Enter your password" required>
+			<label for="password" onclick="matchPassword()">Password:</label>
+			<input type="password" id="password" name="password" placeholder="Enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
-			<label for="confirmpassword">Confirm Password:</label>
-			<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm your password" required>
+
+			<label for="confirmpassword" onclick="matchPassword()">Confirm Password:</label>
+			<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
 			<br>
-			<input type="submit" onclick ="msg()" value="Sign Up">
+			<input type="submit" onclick="msg" value="Sign Up">
 			
 		</form>
 		<br>
