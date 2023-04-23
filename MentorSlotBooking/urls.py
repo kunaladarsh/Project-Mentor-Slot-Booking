@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from myapp.views import loginaction
 from myapp.views import signupaction
+from myapp.views import editaction
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',loginaction, name='home'),
     path('signup/', signupaction),
+    path('editProfile/', editaction),
     
 ]

@@ -3,6 +3,11 @@
 <head>
 	<title>Student Signup</title>
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<script>
+        function msg() {
+            alert("SignUp Successful");
+        }
+    </script>
 </head>
 <style>
 	body {
@@ -35,6 +40,8 @@ label {
 	display: block;
 	font-size: 18px;
 	font-weight: bold;
+	color: black;
+
 }
 
 input[type="text"],
@@ -55,8 +62,23 @@ input[type="submit"] {
 	border: none;
 	background-color: #4CAF50;
 	color: #fff;
-	cursor: pointer;
+	cursor: pointer;	
 }
+
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
 
 
 </style>
@@ -112,11 +134,12 @@ input[type="submit"] {
 			<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm your password" required>
 
 			<br>
-			<input type="submit" value="Sign Up">
+			<input type="submit" onclick ="msg()" value="Sign Up">
+			
 		</form>
 		<br>
 		<center>
-        <label><p><u><a href="//127.0.0.1:8000/"><p>Return To Login</p></a></label> </center>
+        <label><a href="//127.0.0.1:8000/"><p>Return To Login</p></label></center>
 	</div>
 </body>
 </html>

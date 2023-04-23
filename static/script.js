@@ -10,3 +10,18 @@ if (usernameInput.value === '' || passwordInput.value === '') {
     event.preventDefault();
   }  
 });
+
+
+
+function msgpers() {
+  alert("Personal Details Update Succesfull");
+}
+
+function msgproj() {
+  alert("project Details Update Succesfull");
+}
+
+
+function msgpass() {
+  alert("password Update Succesfull");
+}

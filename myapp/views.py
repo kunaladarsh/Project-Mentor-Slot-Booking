@@ -15,6 +15,7 @@ mentorn=''
 password=''
 cpassword=''
 
+name1=''
 # Create your views here.
 def signupaction(request):
     global name, sapid, roll, dept, proj,semester,pyear,tproject,contact,mentorn, password, cpassword
@@ -61,8 +62,6 @@ def loginaction(request):
         cursor=m.cursor()
         d=request.POST
         for key,value in d.items():
-            if key=="name":
-                name=value
             if key == "sapid":
                 sapid=value
             if key =="password":
@@ -78,8 +77,14 @@ def loginaction(request):
                 'Name': t[0][0],
                 'id': sapid,
                 'dept': t[0][3],
+                'semester':t[0][5],
                 'projtil': t[0][4],
-                
+                'tproj':t[0][7],
+                'Cproj':"NA",
+                'mentor':t[0][9],
+                'contno':t[0][8],
+                'rollno':t[0][2],
+                'pyear':t[0][6],      
             }
             print(dict(data))
             return render(request, "Home.html", data)
@@ -87,3 +92,18 @@ def loginaction(request):
     return render(request, 'Login_page.html')
 
 
+def editaction(request):
+    global name1, sapid
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key=="name1":
+                name1=value
+               
+        c = "update signup1 set name='"+name1+"' where sapid='"+sapid+"'"
+        print(c)
+        cursor.execute(c)
+        m.commit()
+    return render(request, 'editprofile.html')

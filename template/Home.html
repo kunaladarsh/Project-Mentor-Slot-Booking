@@ -27,7 +27,7 @@
 					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="FacultySlot.html"><b>Book the Slot</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="RequestDetailsFac.html"><b>Request</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="about.html"><b>Edit Profile</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/editProfile/"><b>Edit Profile</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="Login_page.html"><b>Logout</b></a></span></li>
 				</ul>
 			</div>
@@ -41,21 +41,23 @@
         <section class="profile">
 			
 			<div class="profile-image">
-				
-				<img src="/static/Icons/shiva.JPG" alt="Profile picture">
+				<img src="/static/Icons/s1.png" style="max-height: 389px;">
+	
 			</div>
 			<div class="profile-content">
 				<center><h5><b>Student Info</h5></b></center>
 				<p><strong>Name: </strong>{{Name}}</p>
-				<p><strong>Roll No:</strong>R214220198</p>
+				<p><strong>Roll No: </strong>{{rollno}}</p>
 				<p><strong>Sap Id: </strong> {{id}}</p>
-				<p><strong>School of Department: </strong>{{sod}}</p>
-				<p><strong>Batch:</strong> 2020-2024</p>
-				<p><strong>Current Study Year:</strong> 3rd year</p>
+				<p><strong>School of Department: </strong>{{dept}}</p>
+				<p><strong>Batch: </strong> {{pyear}}</p>
+				<p><strong>Current Semester: </strong> {{semester}}</p>
 				<p><strong>Project Title: </strong> {{projtil}}</p>
-				<p><strong>Total Projects Done Previously:</strong> 2</p>
-				<p><strong>Current Project Title:</strong> Slot Booking using HTML, CSS, JS</p>
-				<p><strong>Project Mentor:</strong> Vidyanand Sir </p>
+				<p><strong>Total Projects Done: </strong>{{tproj}}</p>
+				<p><strong>Current Project Title: </strong>{{Cproj}}</p>
+				<p><strong>Project Mentor:</strong> {{mentor}} </p>
+				<p><strong>Contact No:</strong> {{contno}} </p>
+
 			</div>
 		</section>
     </main>
