@@ -8,7 +8,7 @@ current_date1 = date.today()
 now = datetime.now()
 current_time1 = now.strftime("%H:%M:%S")
 
-name =''
+name ='' 
 sapid=''
 roll=''
 dept=''
@@ -20,8 +20,20 @@ contact=''
 mentorn=''
 password=''
 cpassword=''
-
 name1=''
+passyear1=''
+name1=''
+sapid=''
+rollno1='' 
+dept1='' 
+semester1=''
+passyear1='' 
+ProjectDone1=''
+projtitle1=''
+contactNo1='' 
+password1=''
+mentor1=''
+
 # Create your views here.
 def signupaction(request):
     global name, sapid, roll, dept, proj,semester,pyear,tproject,contact,mentorn, password, cpassword
@@ -99,7 +111,7 @@ def loginaction(request):
 
 
 def editaction(request):
-    global name1, sapid, rollno1, dept1, semester1, passyear1, ProjectDone1, projtitle1, contactNo1, password1
+    global name1, sapid, rollno1, dept1, semester1, passyear1, ProjectDone1, projtitle1, contactNo1, password1, mentor1
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -200,3 +212,118 @@ def senddetails(request):
         cursor.execute(c)
         m.commit()
     return render(request, 'sendDetails.html')
+
+
+
+
+
+
+def requestaction(request):
+    global sapid, password, name,dept, proj
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key == "sapid":
+                sapid=value
+            if key =="password":
+                password=value
+        c = "select * from Signup1 where sapid='{}' and password='{}'".format(sapid, password)
+        cursor.execute(c)
+        
+        
+    return render(request, 'RequestDetailsFac.html')
+
+
+def slotbookingaction(request):
+    global sapid, password, name,dept, proj
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key == "sapid":
+                sapid=value
+            if key =="password":
+                password=value
+        c = "select * from Signup1 where sapid='{}' and password='{}'".format(sapid, password)
+        cursor.execute(c)
+        
+        
+    return render(request, 'FacultySlot.html')
+
+
+def homeaction(request):
+    global sapid, password, name,dept, proj
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key == "sapid":
+                sapid=value
+            if key =="password":
+                password=value
+        c = "select * from Signup1 where sapid='{}' and password='{}'".format(sapid, password)
+        cursor.execute(c)
+        t=tuple(cursor.fetchall())
+        data1={ 
+                'title':'Project Mentor Slot Booking',
+                'Name': t[0][0],
+                'id': sapid,
+                'dept': t[0][3],
+                'semester':t[0][5],
+                'projtil': t[0][4],
+                'tproj':t[0][7],
+                'Cproj':"NA",
+                'mentor':t[0][9],
+                'contno':t[0][8],
+                'rollno':t[0][2],
+                'pyear':t[0][6],      
+            }
+            
+        return render(request, "Home.html", data1)
+        
+        
+    return render(request, 'Home.html')
+
+
+
+
+
+####################################################################################################################
+                             #### Teacher profile works  ####
+
+def loginactionteacher(request):
+    global id, password
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key == "id":
+                id=value
+            if key =="password":
+                password=value
+        c = "select * from teacher where id='{}' and password='{}'".format(id, password)
+        cursor.execute(c)
+        t1=tuple(cursor.fetchall())
+        if t1 ==():
+            return render(request, 'error.html')       
+        else:
+            data1={ 
+                'title':'Project Mentor Slot Booking',
+                'Name': t1[0][0],
+                'id':t1[0][1],
+                'dept': t1[0][2],
+                'email': t1[0][3],
+                'phoneNumber': t1[0][4],
+                'office_numer': t1[0][5],
+                'total_slot': t1[0][7],
+                'fill_slot': t1[0][8],
+                
+            }
+            return render(request, "teacherhome.html", data1)
+        
+    return render(request, 'teacher_login.html')

@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title>LOGIN TO MENTOR SLOT Booking</title>
-    
-    
     <style>
       /* Add styles for the page */
       body {
@@ -18,7 +16,7 @@
       }
 
       .form-container {
-        background-color: #f7f8fb;
+        background-color: #f5f6ff;
         padding: 4rem;
         border-radius: 1rem;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -29,6 +27,13 @@
         text-align: center;
         color: rgb(6, 65, 127);
         margin-bottom: 2rem;
+      } 
+      h3 { 
+        text-align: center;
+        color: rgb(3, 39, 77);
+        margin-bottom: 2rem;
+        font-style: oblique;
+
       } 
 
       form {
@@ -69,7 +74,7 @@
         border-radius: 1.25rem;
         border: none;
         cursor: pointer;
-        box-shadow: 0px 0px 0.5px #888888;
+        box-shadow: 0px 0px 0.5px #cbb3b3;
       }
     </style>
   </head>
@@ -81,29 +86,26 @@
         {% load static %}
       <img src="https://s3.amazonaws.com/upes-prod/media/7545/upes-logo.webp" style="max-height: 80px;"/>    
       <h1>Login To Slot Booking</h1>
+      <h3><b>Teachers Login</b></h3>
       <form>
         <label for="username">User ID:</label>
-        <input type="text" id="username" placeholder="Email ID" name="sapid" required>
-
+        <input type="text" id="id" placeholder="Email ID" name="id" required>
         <label for="password">Password:</label>
+        
         <input type="password" id="password" placeholder="password" name="password" required>
-
         <input type="submit" value="LOGIN TO UPES"> 
-
-        <center>
-        <label><p><u><a href="//127.0.0.1:8000/signup/"><p>Create a account</p></a></label> 
-        <label><p><u><a href="//127.0.0.1:8000/teacherhome/"><p>Teacher Login</p></a></label> 
-        <label><p><u><a href="//127.0.0.1:8000/signup/"><p>Admin Login</p></a></label> 
+        <center> 
 
         </center>
-
     </div>
   </center>
   </body>
+</form>
+</form>
 </center>
   <body>
     <div class="SecContainer">
-      <img src="/static/Icons/loginPic.png" style="max-height: 637px; border-radius:12px;"/>
+      <img src="/static/Icons/loginPic.png" style="max-height: 589px; border-radius:12px;"/>
     </div>
   </body>
   </center>

@@ -9,7 +9,7 @@
 </head>
 <style>
     .booking-form {
-   width: 400px;
+   width: 800px;
    margin: 0 auto;
    font-family: Arial, sans-serif;
  }
@@ -61,6 +61,8 @@
    border: none;
    border-radius: 4px;
    cursor: pointer;
+  
+
  }
  
  input[type=submit]:hover {
@@ -86,11 +88,11 @@
 
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="FacultySlot.html"><b>Book the Slot</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="RequestDetailsFac.html"><b>Request</b></a></span></li>
+					<li class="nav-item"><span><a class="nav-link active" href="//127.0.0.1:8000/Home/"><b>Home</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/SlotBooking/"><b>Book the Slot</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/requestdetails/"><b>Request</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/editProfile/"><b>Edit Profile</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="Login_page.html"><b>Logout</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/senddetails/"><b>Logout</b></a></span></li>
 				</ul>
 			</div>
 		</nav>
@@ -107,7 +109,7 @@
     <form>
       <label for="projecttitle">Project Title:</label>
       <input type="text" id="projecttitle" name="projecttitle" required>
-  
+     
       <label for="message">Project Explanation:</label>
       <textarea id="message" name="message" required></textarea>
 
@@ -145,7 +147,5 @@
        
 
     </main>
-
 </body>
-
 </html>

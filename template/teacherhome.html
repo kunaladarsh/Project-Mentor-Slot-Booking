@@ -24,11 +24,11 @@
 
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><span><a class="nav-link active" href="//127.0.0.1:8000/Home/"><b>Home</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/SlotBooking/"><b>Book the Slot</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/requestdetails/"><b>Request</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/editProfile/"><b>Edit Profile</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="logout.html"><b>Logout</b></a></span></li>
+					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="FacultySlot.html"><b>Student Requests</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="RequestDetailsFac.html"><b>Current Projects</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="about.html"><b>Edit Profile</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="Login_page.html"><b>Logout</b></a></span></li>
 				</ul>
 			</div>
 		</nav>
@@ -41,23 +41,19 @@
         <section class="profile">
 			
 			<div class="profile-image">
+				
 				<img src="/static/Icons/s1.png" style="max-height: 389px;">
-	
 			</div>
 			<div class="profile-content">
-				<center><h5><b>Student Info</h5></b></center>
+				<center><h5><b>Teacher Information </h5></b></center>
 				<p><strong>Name: </strong>{{Name}}</p>
-				<p><strong>Roll No: </strong>{{rollno}}</p>
-				<p><strong>Sap Id: </strong> {{id}}</p>
+				<p><strong>Teacher_Id: </strong> {{id}}</p>
 				<p><strong>School of Department: </strong>{{dept}}</p>
-				<p><strong>Batch: </strong> {{pyear}}</p>
-				<p><strong>Current Semester: </strong> {{semester}}</p>
-				<p><strong>Project Title: </strong> {{projtil}}</p>
-				<p><strong>Total Projects Done: </strong>{{tproj}}</p>
-				<p><strong>Current Project Title: </strong>{{Cproj}}</p>
-				<p><strong>Project Mentor:</strong> {{mentor}} </p>
-				<p><strong>Contact No:</strong> {{contno}} </p>
-
+				<p><strong>Email: </strong>{{email}}</p>
+				<p><strong>Phone Number: </strong> {{phoneNumber}}</p>
+				<p><strong>Office Location: </strong>{{office_numer}}</p>
+				<p><strong>Total Slots: </strong> {{total_slot}} </p>
+				<p><strong>Filled Slots: </strong> {{fill_slot}} </p>
 			</div>
 		</section>
     </main>

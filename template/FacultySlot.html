@@ -9,19 +9,19 @@
         input[type="Available Slot"] {
          background-color: rgb(199, 213, 227);
          color: #000000;
-         padding: 0.5rem 2rem;
+         padding: 0.5rem 1rem;
          border-radius: 0.2rem;
          border: none;
          cursor: pointer;
          text-align: center;
          font-weight: bold;
-         width: 200px;
+         width: 170px;
          margin-bottom: 1rem;
          
          box-shadow: 0px 0px 0.5px #eae2e2;
        }
  
-       input[type="submit"] {
+       /* button[type="submit"] {
          background-color: rgb(180, 6, 6);
          color: #ffffff;
          padding: 0.5rem 2.5rem;
@@ -32,8 +32,57 @@
          font-weight: bold;
          margin-bottom: 1rem;
          
-         box-shadow: 0px 0px 0.5px #eae2e2;
-       }
+         box-shadow: 0px 0px 0.5px #ffffff;
+       } */
+
+       .button {
+       display: inline-block;
+       background-color: rgb(180, 6, 6);
+         color: #ffffff;
+         padding: 0.5rem 2.5rem;
+         border-radius: 0.25rem;
+         border: none;
+         color: rgb(255, 255, 255);
+         cursor: pointer;
+         text-align: center;
+         font-weight: bold;
+         margin-bottom: 1rem;
+         
+          box-shadow: 0px 0px 0.5px #ffffff;
+          transition: all 0.5s;
+          cursor: pointer;
+          margin: 5px;
+          }
+
+          .button span {
+           cursor: pointer;
+           display: inline-block;
+           position: relative;
+           transition: 0.5s;
+          }
+
+          .button span:after {
+           content: '\00bb';
+           position: absolute;
+           opacity: 0;
+           top: 0;
+           right: -20px;
+           transition: 0.5s;
+            }
+
+           .button:hover span {
+            padding-right: 25px;
+            }
+
+           .button:hover span:after {
+            opacity: 1;
+            right: 0;
+             }
+
+             a {
+              color: #ffffff;
+               
+             }
        </style>
 </head>
 
@@ -53,11 +102,11 @@
 
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="FacultySlot.html"><b>Book the Slot</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="RequestDetailsFac.html"><b>Request</b></a></span></li>
-          <li class="nav-item "><span><a class="nav-link" href="about.html"><b>Edit Profile</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="Login_page.html"><b>Logout</b></a></span></li>
+					<li class="nav-item"><span><a class="nav-link active" href="//127.0.0.1:8000/Home/"><b>Home</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/SlotBooking/"><b>Book the Slot</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/requestdetails/"><b>Request</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/editProfile/"><b>Edit Profile</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="logout.html"><b>Logout</b></a></span></li>
 				</ul>
 			</div>
 		</nav>
@@ -78,7 +127,9 @@
                       <td>
                         <h3>Dr Ravi S Iyer</h3>
                         <p>Dean, School of Computer Science</p>
-                        <p class="description">Dr Ravi S Iyer is the inventor of PoMA (Proof-of-Match Adaptive), a fast, fair, and quantum-resistant leader-election mechanism for high-speed blockchains.</p>
+                        <p class="description">Dr Ravi S Iyer is the inventor of PoMA (Proof-of-Match Adaptive), 
+                           a fast, fair, <br> and quantum-resistant leader-election mechanism <br>
+                           for high-speed blockchains.</p>
                         <br>
                       </div>
                       </td>
@@ -86,7 +137,7 @@
                         <br><br><br>
                         <input type="Available Slot", id="700084627" value="Available Slot: 5">  
                         <br>
-                        <input type="submit" value="SLOT BOOKING">  
+                        <button class="button" style="vertical-align:center"><span><a href="//127.0.0.1:8000/senddetails/"> Booked Slot </a></span></button>
                       </td>
                       <td>                         
                       </td>
@@ -94,34 +145,35 @@
                     </tr>
 
 
-          <tr>
-          <td>
-            <img
-              src="https://media.licdn.com/dms/image/D4D03AQGDsQiFNcUyGg/profile-displayphoto-shrink_800_800/0/1678016474506?e=2147483647&v=beta&t=iebeYbs2OtUYmAMyknTI_GW9JxxpFs7NXU2JzRRi4Dk"
-              width="200" height="200" alt="" loading="lazy">
-          </td>
-          <td>
-            <h3>Vidyanand Mishra</h3>
-            <p>Assistant Professor, School of Computer Science</p>
-            <p class="description"><b>Area of Specialization:</b><br>
-              Genetic algorithm<br>
-              PSO optimization<br>
-              Cloud computing
-            </p>
-            <br>
-    </div>
-    </td>
-    <td>
-      <br><br><br>
-      <input type="Available Slot" id="700084599" value="Available Slot: 2">
-      <br>
-      <input type="submit" value="SLOT BOOKING">
-    </td>
-    <td>
-    </td>
-    </tr>
+                  <tr>
+                  <td>
+                    <img
+                      src="https://media.licdn.com/dms/image/D4D03AQGDsQiFNcUyGg/profile-displayphoto-shrink_800_800/0/1678016474506?e=2147483647&v=beta&t=iebeYbs2OtUYmAMyknTI_GW9JxxpFs7NXU2JzRRi4Dk"
+                      width="200" height="200" alt="" loading="lazy">
+                  </td>
+                  <td>
+                    <h3>Vidyanand Mishra</h3>
+                    <p>Assistant Professor, School of Computer Science</p>
+                    <p class="description"><b>Area of Specialization:</b><br>
+                      Genetic algorithm<br>
+                      PSO optimization<br>
+                      Cloud computing
+                    </p>
+                    <br>
+                  </div>
+                    </td>
+                      <td>
+                      <br><br><br>
+                        <input type="Available Slot" id="700084599" value="Available Slot: 2">
+                        <br>
+                        <button class="button" style="vertical-align:center"><span><a href="//127.0.0.1:8000/senddetails/">Booked Slot</a></span></button>
+                      </td>
+                      <td>
+                      </td>
+                  </tr>
 
-                    <tr>
+
+                   <tr>
                       <td>
                         <img src="https://www.upes.ac.in/media/8736/pankaj.jpg?anchor=center&mode=crop&width=200&height=204&rnd=133211187650000000" alt="" loading="lazy"></td>            
                       <td>
@@ -139,7 +191,7 @@
                         <br><br><br>
                         <input type="Available Slot" id="700084899" value="Available Slot: 9">  
                         <br>
-                        <input type="submit" value="SLOT BOOKING">  
+                        <button class="button" style="vertical-align:center"><span><a href="//127.0.0.1:8000/senddetails/">Booked Slot</a></span></button>
                       </td>
                       <td>                         
                       </td>
@@ -166,7 +218,7 @@
                         <br><br><br>
                         <input type="Available Slot" id="700085766" value="Available Slot: 3">  
                         <br>
-                        <input type="submit" value="SLOT BOOKING">  
+                        <button class="button" style="vertical-align:center"><span><a href="//127.0.0.1:8000/senddetails/">Booked Slot</a></span></button>
                       </td>
                       <td>                         
                       </td>
@@ -195,7 +247,7 @@
                         <br><br><br>
                         <input type="Available Slot" id="700086698" value="Available Slot: 5">  
                         <br>
-                        <input type="submit" value="SLOT BOOKING">  
+                        <button class="button" style="vertical-align:center"><span><a href="//127.0.0.1:8000/senddetails/">Booked Slot</a></span></button>
                       </td>
                       <td>                         
                       </td>

@@ -18,17 +18,28 @@ from django.contrib import admin
 from django.urls import path
 from myapp.views import loginaction
 from myapp.views import signupaction
+from myapp.views import homeaction
 from myapp.views import editaction
 from myapp.views import senddetails
+from myapp.views import requestaction
+from myapp.views import slotbookingaction
+from myapp.views import loginactionteacher
+
+
 
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+   
     path('',loginaction, name='home'),
     path('signup/', signupaction),
     path('editProfile/', editaction),
     path('senddetails/', senddetails),
+    path('requestdetails/', requestaction),
+    path('SlotBooking/', slotbookingaction),   
+    path('Home/', homeaction),   
 
-    
+    path('teacherhome/', loginactionteacher),   
+
+
 ]
