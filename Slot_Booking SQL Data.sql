@@ -26,6 +26,11 @@ password varchar(50),
 totalslot int(10),
 fillslot int(10));
 
+select * from teacher;
+INSERT INTO teacher (name, id, department, email, phoneNumber, office_number, password, totalslot, fillslot)
+VALUES ('John Smith', '123', 'Computer Science', '098765', '555-1234', 'C-205', 'password123', 4, 5);
+
+
 create table slotbooking(FEmailid varchar(50), 
 projecttitle varchar(100), 
 message varchar(300), 

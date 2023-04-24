@@ -33,6 +33,8 @@ projtitle1=''
 contactNo1='' 
 password1=''
 mentor1=''
+email=''
+FEmailid1=''
 
 # Create your views here.
 def signupaction(request):
@@ -296,7 +298,7 @@ def homeaction(request):
                              #### Teacher profile works  ####
 
 def loginactionteacher(request):
-    global id, password
+    global id, password, FEmailid1
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -309,9 +311,12 @@ def loginactionteacher(request):
         c = "select * from teacher where id='{}' and password='{}'".format(id, password)
         cursor.execute(c)
         t1=tuple(cursor.fetchall())
+        FEmailid1=t1[0][3]
         if t1 ==():
             return render(request, 'error.html')       
         else:
+            FEmailid1=t1[0][3]
+            print(email)
             data1={ 
                 'title':'Project Mentor Slot Booking',
                 'Name': t1[0][0],
@@ -323,7 +328,28 @@ def loginactionteacher(request):
                 'total_slot': t1[0][7],
                 'fill_slot': t1[0][8],
                 
+                
             }
             return render(request, "teacherhome.html", data1)
         
     return render(request, 'teacher_login.html')
+
+
+def teachernewrequests(request):    
+    m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+    cursor=m.cursor()
+    d=request.POST
+    #c = "select * from slotbooking"
+    
+    c = "select * from slotbooking where FEmailid='{}'".format(FEmailid1)
+
+    cursor.execute(c)
+    t=tuple(cursor.fetchall())
+    print(t)
+    if t ==():
+            return render(request, 'error.html')  
+    data={
+               "data":t
+    }
+    return render(request, "teacher_newrequest.html", data)
+

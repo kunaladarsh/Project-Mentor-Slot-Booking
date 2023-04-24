@@ -24,6 +24,8 @@ from myapp.views import senddetails
 from myapp.views import requestaction
 from myapp.views import slotbookingaction
 from myapp.views import loginactionteacher
+from myapp.views import teachernewrequests
+
 
 
 
@@ -39,7 +41,9 @@ urlpatterns = [
     path('SlotBooking/', slotbookingaction),   
     path('Home/', homeaction),   
 
-    path('teacherhome/', loginactionteacher),   
+    path('teacherhome/', loginactionteacher), 
+    path('request/', teachernewrequests),   
+  
 
 
 ]

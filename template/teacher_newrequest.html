@@ -1,0 +1,169 @@
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>{{title}}</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+   
+</head>
+<style>
+
+   .profile121{  
+    background-color: rgb(229, 250, 245);
+    display: inline-block;
+    width: 105%;
+    padding: auto;
+    padding: 10px 80px 20px;
+    margin: auto;
+    height: 100%;
+    text-align: center;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+    
+.btn1 {
+    background-color: #002b8f;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  margin: 4px 2px;
+  font-weight: bold;
+  transition: 0.3s;
+        padding: 0.75rem 3.5rem;
+        border-radius: 0.49rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0px 0px 1.5px #ffffff;
+}
+
+.btn1:hover {
+  background-color: #0055ffaf;
+  color: white;
+}
+
+   
+.btn2 {
+    background-color: #791400;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  margin: 4px 2px;
+  font-weight: bold;
+  transition: 0.3s;
+        padding: 0.75rem 3.5rem;
+        border-radius: 0.49rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0px 0px 1.5px #ffffff;
+}
+
+.btn2:hover {
+  background-color: #ff0000d4;
+  color: white;
+}
+
+
+</style>
+
+<body onload="funload()">
+	
+	<header>
+		<nav class="navbar navbar-expand-sm bg-secondary navbar-secondary">
+			<a class="navbar-brand">
+				<!-- The below line can be an image or a h1, either will work -->
+				<img src="https://s3.amazonaws.com/upes-prod/media/7545/upes-logo.webp" style="max-height: 38px;"
+					alt="">
+			</a>
+		<nav class="navbar navbar-expand-sm bg-secondary justify-content-center">
+			<button style="background-color:rgb(196, 193, 193);" class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="FacultySlot.html"><b>New Requests</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="RequestDetailsFac.html"><b>Current Projects</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="about.html"><b>Edit Profile</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="Login_page.html"><b>Logout</b></a></span></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+    <br>
+
+    <main>
+        
+    <main>
+        {% for i in data%}
+        <section class="profile">
+			
+			<div style="border: 1px solid rgb(1, 64, 74);" class="profile121">
+            <table><tr>
+                <td><center>
+				<p><strong>Project title: </strong>{{i.1}}</p>
+            </center>
+                </td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>        
+                
+                <td><center>
+				<p><strong>Message: </strong> {{i.2}}</p>
+            </center></td>
+
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        
+
+                <td><center>
+				<p><strong>Member1: </strong>{{i.3}}</p>
+				<p><strong>Member2:</strong>{{i.4}}</p>
+				<p><strong>Member3: </strong> {{i.5}}</p>
+				<p><strong>Member4: </strong>{{i.6}}</p>
+                <p><strong>Member5: </strong>{{i.7}}</p>
+                </center>
+                </td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        
+                <td><center>
+				<p><strong>Date:</strong> {{i.8}} </p>
+				<p><strong>Time:</strong> {{i.9}} </p>
+                </center>
+                </td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        
+
+                <td>
+                <center>
+                <button class="btn1" onclick="msgpass">Accept</button><br>
+                <button class="btn2" onclick="msgpass">Reject</button>
+                </form>
+                </center>	    
+                </td></tr>
+              </table>
+			</div>
+            <br>
+            <br>
+		</section>
+        {% endfor %}
+        <br>
+    </main>
+    <br>
+
+</body>
+
+</html>
