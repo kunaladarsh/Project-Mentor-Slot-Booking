@@ -1,3 +1,4 @@
+
 <html>
 <head>
 	<meta charset="ISO-8859-1">
@@ -24,11 +25,11 @@
 
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><span><a class="nav-link active" href="//127.0.0.1:8000/homePage"><b>Home</b></a></span></li>
+					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/request/"><b>New Requests</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/slotaccepted/"><b>Accepted Projects</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="about.html"><b>Edit Profile</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="Login_page.html"><b>Logout</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/"><b>Logout</b></a></span></li>
 				</ul>
 			</div>
 		</nav>
@@ -38,24 +39,25 @@
     <main>
         
     <main>
+        <center><h5><b>Accepted Projects</h5></b></center>
+        {% for i in data%}
         <section class="profile">
 			
-			<div class="profile-image">
-				
-				<img src="/static/Icons/s1.png" style="max-height: 389px;">
+			<div style="border: 1px solid red;" class="profile-content">
+				<p><strong>Project detail: </strong>{{i.1}}</p>
+				<p><strong>Message: </strong> {{i.2}}</p>
+				<p><strong>Member1: </strong>{{i.3}}</p>
+				<p><strong>Member2:</strong>{{i.4}}</p>
+				<p><strong>Member3: </strong> {{i.5}}</p>
+				<p><strong>Member4: </strong>{{i.6}}</p>
+                <p><strong>Member5: </strong>{{i.7}}</p>
+				<p><strong>Date:</strong> {{i.8}} </p>
+				<p><strong>Time:</strong> {{i.9}} </p>
 			</div>
-			<div class="profile-content">
-				<center><h5><b>Teacher Information </h5></b></center>
-				<p><strong>Name: </strong>{{Name}}</p>
-				<p><strong>Teacher_Id: </strong> {{id}}</p>
-				<p><strong>School of Department: </strong>{{dept}}</p>
-				<p><strong>Email: </strong>{{email}}</p>
-				<p><strong>Phone Number: </strong> {{phoneNumber}}</p>
-				<p><strong>Office Location: </strong>{{office_numer}}</p>
-				<p><strong>Total Slots: </strong> {{total_slot}} </p>
-				<p><strong>Filled Slots: </strong> {{fill_slot}} </p>
-			</div>
+            <br>
+            <br>
 		</section>
+        {% endfor %}
     </main>
 
 </body>

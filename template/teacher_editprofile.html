@@ -101,7 +101,7 @@ select {
 }
 
 .btn:hover {
-  background-color: #fe83f4;
+  background-color: #154700;
   color: white;
 }
   
@@ -123,7 +123,7 @@ select {
 }
 
 .btn1:hover {
-  background-color: #0055ffaf;
+  background-color: #d20000;
   color: white;
 }
 
@@ -178,17 +178,23 @@ h5 {
 
           <td>
               <center>
-              <label for="name1"><b>Name:</b></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <input type="text" id="name1" name="name1" value={{Name}}><br><br>
+              <label for="tname"><b>Name:</b></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              <input type="text" id="tname" name="tname" value=''><br><br>
       
-              <label for="rollno1"><b>Roll Number:</b></label>&nbsp&nbsp
-               <input type="text" id="rollno1" name="rollno1" value=""><br><br>
+              <label for="tid"><b>Teacher Id:</b></label>&nbsp&nbsp
+               <input type="text" id="tid" name="tid" value=""><br><br>
       
-               <label for="dept1"><b>Department:</b></label>&nbsp&nbsp
-               <input type="text" id="dept1" name="dept1" value=""><br><br>
+               <label for="tdept"><b>Department:</b></label>&nbsp
+               <input type="text" id="tdept" name="tdept" value=""><br><br>
 
-               <label for="semester1"><b>Current Sem:</b></label>&nbsp&nbsp
-                <input type="text" id="semester1" name="semester1" value=""><br><br>
+               <label for="temail"><b>Email:</b></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="text" id="temail" name="temail" value=""><br><br>
+
+                <label for="tphoneno"><b>Phone No:</b></label>&nbsp&nbsp
+                <input type="text" id="tphoneno" name="tphoneno" value=""><br><br>
+
+                <label for="officeno"><b>Office Location:</b></label>
+                <input type="text" id="officeno" name="officeno" value=""><br><br>
               </center>
           </td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -215,33 +221,21 @@ h5 {
         {% load static %}
           <table>
           <tr><td>  
-          <CENTER><h3><b>Projects Details</b><h3></center><br></td>
+          <CENTER><h3><b>Slot Details</b><h3></center><br></td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
   
             <td>
                 <center>
-                  <label for="projtitle1"><b>Project Title:</label>&nbsp&nbsp
-                  <input type="text" id="projtitle1" name="projtitle1" value=""><br><br>
+                  <label for="totalslot"><b>Total Slots::</label>&nbsp&nbsp
+                  <input type="text" id="totalslot" name="totalslot" value=""><br><br>
 
-                  <label for="mentor1">Mentor Name:</label>&nbsp&nbsp
-                  <input type="text" id="mentor1" name="mentor1" value=""><br><br>
+                  <label for="filledslot">Filled Slot:</label>&nbsp&nbsp
+                  <input type="text" id="filledslot" name="filledslot" value=""><br><br>
 
                   
                  </center>
-                 <center>
-                  <label for="ProjectDone1">Project Done:</label>&nbsp&nbsp
-                  <input type="text" id="ProjectDone1" name="ProjectDone1" value=""><br><br>
-
-                  <label for="passyear1">Passing Year:</label>&nbsp&nbsp
-                  <input type="text" id="passyear1" name="passyear1" value=""><br><br>
-
-                  <label for="contactNo1">Contact No:</label>&nbsp&nbsp
-                  <input type="text" id="contactNo1" name="contactNo1" value=""><br><br>
-                 </center>
-                  
-                  
             </td>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -249,7 +243,7 @@ h5 {
   
             <td>
                 <center>
-                <button class="btn" onclick="msgproj">Update Details</button>
+                <button class="btn" onclick="msgproj">Update Slots</button>
                 </form>
                 </center>	
                  <br>
@@ -275,7 +269,7 @@ h5 {
             <td>
                 <center>
                   <br>
-                  <input type="text1" id="password1" name="password1" value=""><br><br>
+                  <input type="text1" id="tpassword" name="tpassword" value=""><br><br>
                  </center>
                   
                   

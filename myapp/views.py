@@ -10,6 +10,7 @@ current_time1 = now.strftime("%H:%M:%S")
 
 name ='' 
 sapid=''
+sapid1=''
 roll=''
 dept=''
 proj=''
@@ -35,6 +36,21 @@ password1=''
 mentor1=''
 email=''
 FEmailid1=''
+temail=''
+totalslot=''
+td1=''
+tname=''
+tid=''
+tdept=''
+tphoneno=''
+officeno=''
+totalslot=''
+filledslot=''
+tpassword='' 
+temail=''
+filledslot=''
+
+
 
 # Create your views here.
 def signupaction(request):
@@ -76,7 +92,7 @@ def signupaction(request):
 
 
 def loginaction(request):
-    global sapid, password, name,dept, proj
+    global sapid, password, name,dept, proj, sapid1
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -92,6 +108,7 @@ def loginaction(request):
         if t ==():
             return render(request, 'error.html')       
         else:
+            sapid1=sapid
             data={ 
                 'title':'Project Mentor Slot Booking',
                 'Name': t[0][0],
@@ -187,7 +204,7 @@ def editaction(request):
 
 
 def senddetails(request):
-    global FEmailid, projecttitle, message, member1, member2, member3, member4, member5, Ctime;
+    global FEmailid, projecttitle, message, member1, member2, member3, member4, member5
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -210,13 +227,10 @@ def senddetails(request):
             if key =="member5":
                 member5=value
             
-        c = "insert into slotbooking values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
+        c = "insert into newrequest values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
         cursor.execute(c)
         m.commit()
     return render(request, 'sendDetails.html')
-
-
-
 
 
 
@@ -257,38 +271,38 @@ def slotbookingaction(request):
 
 
 def homeaction(request):
-    global sapid, password, name,dept, proj
-    if request.method=="POST":
-        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
-        cursor=m.cursor()
-        d=request.POST
-        for key,value in d.items():
-            if key == "sapid":
-                sapid=value
-            if key =="password":
-                password=value
-        c = "select * from Signup1 where sapid='{}' and password='{}'".format(sapid, password)
-        cursor.execute(c)
-        t=tuple(cursor.fetchall())
-        data1={ 
-                'title':'Project Mentor Slot Booking',
-                'Name': t[0][0],
-                'id': sapid,
-                'dept': t[0][3],
-                'semester':t[0][5],
-                'projtil': t[0][4],
-                'tproj':t[0][7],
-                'Cproj':"NA",
-                'mentor':t[0][9],
-                'contno':t[0][8],
-                'rollno':t[0][2],
-                'pyear':t[0][6],      
-            }
-            
-        return render(request, "Home.html", data1)
+    global sapid, password, name,dept, proj, sapid1
+    
+    m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+    cursor=m.cursor()
+    d=request.POST
+    for key,value in d.items():
+        if key == "sapid":
+            sapid=value
+        if key =="password":
+            password=value
+    c = "select * from Signup1 where sapid='{}'".format(sapid1)
+    cursor.execute(c)
+    t=tuple(cursor.fetchall())
+    data1={ 
+            'title':'Project Mentor Slot Booking',
+            'Name': t[0][0],
+            'id': sapid1,
+            'dept': t[0][3],
+            'semester':t[0][5],
+            'projtil': t[0][4],
+            'tproj':t[0][7],
+            'Cproj':"NA",
+            'mentor':t[0][9],
+            'contno':t[0][8],
+            'rollno':t[0][2],
+            'pyear':t[0][6],      
+        }
         
-        
-    return render(request, 'Home.html')
+    return render(request, "Home.html", data1)
+
+
+
 
 
 
@@ -311,7 +325,6 @@ def loginactionteacher(request):
         c = "select * from teacher where id='{}' and password='{}'".format(id, password)
         cursor.execute(c)
         t1=tuple(cursor.fetchall())
-        FEmailid1=t1[0][3]
         if t1 ==():
             return render(request, 'error.html')       
         else:
@@ -339,9 +352,8 @@ def teachernewrequests(request):
     m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
     cursor=m.cursor()
     d=request.POST
-    #c = "select * from slotbooking"
     
-    c = "select * from slotbooking where FEmailid='{}'".format(FEmailid1)
+    c = "select * from newrequest where FEmailid='{}'".format(FEmailid1)
 
     cursor.execute(c)
     t=tuple(cursor.fetchall())
@@ -353,3 +365,115 @@ def teachernewrequests(request):
     }
     return render(request, "teacher_newrequest.html", data)
 
+
+
+def slotaccepted(request):
+    m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+    cursor=m.cursor()
+    d=request.POST
+    c = "select * from accepted"
+    cursor.execute(c)
+    t=tuple(cursor.fetchall())
+    print(t)
+    if t ==():
+            return render(request, 'error.html')
+      
+    data={
+               "data":t
+    }
+    return render(request, "teacher_slotaccepted.html", data)
+
+
+
+
+def teacherhomeaction(request):
+        global id1, id
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        
+        c = "select * from teacher where id='{}'".format(id)
+        cursor.execute(c)
+        t1=tuple(cursor.fetchall())
+        data1={ 
+                'title':'Project Mentor Slot Booking',
+                'Name': t1[0][0],
+                'id':t1[0][1],
+                'dept': t1[0][2],
+                'email': t1[0][3],
+                'phoneNumber': t1[0][4],
+                'office_numer': t1[0][5],
+                'total_slot': t1[0][7],
+                'fill_slot': t1[0][8],
+                
+                
+        }
+        return render(request, "teacherhome.html", data1)
+
+
+
+
+def teachereditrequest(request):
+    global tname, tid, tdept, tphoneno, officeno, totalslot, filledslot, tpassword, temail
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key=="tname":
+                tname=value
+            if key =="tid":
+                tid=value
+            if key=="tdept":
+                tdept=value
+            if key =="temail":
+                temail=value
+            if key =="tphoneno":
+                tphoneno=value
+            if key =="officeno":
+                officeno=value                
+            if key =="totalslot":
+                totalslot=value
+            if key == "filledslot":
+                filledslot=value            
+            if key == "tpassword":
+                tpassword=value
+            
+        if tname !="":
+            c = "update teacher set name='"+tname+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if tid !="":
+            c = "update teacher set id='"+tid+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if tdept !="":
+            c = "update teacher set department='"+tdept+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if temail !="":
+            c = "update teacher set email='"+temail+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if tphoneno !="":
+            c = "update teacher set phoneNumber='"+tphoneno+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if officeno !="":
+            c = "update teacher set office_number='"+officeno+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if totalslot !="":
+            c = "update teacher set totalslot='"+totalslot+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if filledslot !="":
+            c = "update teacher set fillslot='"+filledslot+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+        if tpassword !="":
+            c = "update teacher set password='"+tpassword+"' where id='"+id+"'"
+            cursor.execute(c)
+            m.commit()
+       
+    return render(request, 'teacher_editprofile.html')

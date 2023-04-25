@@ -23,11 +23,12 @@ from myapp.views import editaction
 from myapp.views import senddetails
 from myapp.views import requestaction
 from myapp.views import slotbookingaction
+
 from myapp.views import loginactionteacher
 from myapp.views import teachernewrequests
-
-
-
+from myapp.views import slotaccepted
+from myapp.views import teacherhomeaction
+from myapp.views import teachereditrequest
 
 
 
@@ -42,7 +43,12 @@ urlpatterns = [
     path('Home/', homeaction),   
 
     path('teacherhome/', loginactionteacher), 
-    path('request/', teachernewrequests),   
+    path('request/', teachernewrequests), 
+    path('slotaccepted/', slotaccepted),
+    path('homePage/', teacherhomeaction),   
+    path('teachereditProfile/', teachereditrequest),   
+   
+  
   
 
 
