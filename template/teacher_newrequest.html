@@ -42,13 +42,13 @@
 }
 
 .btn1:hover {
-  background-color: #0055ffaf;
+  background-color: #0238a5;
   color: white;
 }
 
    
 .btn2 {
-    background-color: #791400;
+    background-color: #8d1700;
   border: none;
   color: rgb(255, 255, 255);
   text-align: center;
@@ -65,7 +65,7 @@
 }
 
 .btn2:hover {
-  background-color: #ff0000d4;
+  background-color: #8e0101;
   color: white;
 }
 
@@ -89,10 +89,10 @@
 
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><span><a class="nav-link active" href="Home.html"><b>Home</b></a></span></li>
+					<li class="nav-item"><span><a class="nav-link active" href="//127.0.0.1:8000/homePage/"><b>Home</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/request/"><b>New Requests</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/slotaccepted/"><b>Current Projects</b></a></span></li>
-					<li class="nav-item "><span><a class="nav-link" href="about.html"><b>Edit Profile</b></a></span></li>
+					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/teachereditProfile/"><b>Edit Profile</b></a></span></li>
 					<li class="nav-item "><span><a class="nav-link" href="//127.0.0.1:8000/"><b>Logout</b></a></span></li>
 				</ul>
 			</div>
@@ -106,7 +106,7 @@
         {% for i in data%}
         <section class="profile">
 			
-			<div style="border: 1px solid rgb(1, 64, 74);" class="profile121">
+			<div style="border: 1px solid rgb(255, 255, 255);" class="profile121">
             <table><tr>
                 <td><center>
 				<p><strong>Project title: </strong>{{i.1}}</p>
