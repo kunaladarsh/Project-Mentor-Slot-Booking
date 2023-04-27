@@ -5,10 +5,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/static/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
-   
 </head>
 <style>
-
    .profile121{  
     background-color: rgb(229, 250, 245);
     display: inline-block;
@@ -52,7 +50,7 @@
   border: none;
   color: rgb(255, 255, 255);
   text-align: center;
-  color: #fff;
+  color: #ffffff;
   font-size: 18px;
   margin: 4px 2px;
   font-weight: bold;
@@ -66,7 +64,7 @@
 
 .btn2:hover {
   background-color: #8e0101;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 
@@ -109,6 +107,8 @@
 			<div style="border: 1px solid rgb(255, 255, 255);" class="profile121">
             <table><tr>
                 <td><center>
+        <p><strong>Project id: </strong>{{i.0}}</p>
+        <br>         
 				<p><strong>Project title: </strong>{{i.1}}</p>
             </center>
                 </td>
@@ -149,8 +149,17 @@
 
                 <td>
                 <center>
-                <button class="btn1" onclick="msgpass">Accept</button><br>
-                <button class="btn2" onclick="msgpass">Reject</button>
+                <button class="btn1" style="vertical-align:center"><span><a href="//127.0.0.1:8000/acceptproject/">Accept</a></span></button>
+
+                <button class="btn2" style="vertical-align:center"><span><a href="//127.0.0.1:8000/rejectproject/">Reject</a></span></button>
+                <script>
+                  function accpet1() {
+                      alert("Project will be accepted Succesfully");
+                     }
+                   function reject1() {
+                       alert("Project Rejected");
+                     }
+                </script> 
                 </form>
                 </center>	    
                 </td></tr>

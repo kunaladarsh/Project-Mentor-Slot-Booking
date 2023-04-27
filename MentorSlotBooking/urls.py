@@ -29,6 +29,8 @@ from myapp.views import teachernewrequests
 from myapp.views import slotaccepted
 from myapp.views import teacherhomeaction
 from myapp.views import teachereditrequest
+from myapp.views import teacheracceptrequest
+from myapp.views import teacherrejectrequest
 
 
 
@@ -47,6 +49,9 @@ urlpatterns = [
     path('slotaccepted/', slotaccepted),
     path('homePage/', teacherhomeaction),   
     path('teachereditProfile/', teachereditrequest),   
+    path('acceptproject/', teacheracceptrequest),
+    path('rejectproject/', teacherrejectrequest),   
+   
    
   
   

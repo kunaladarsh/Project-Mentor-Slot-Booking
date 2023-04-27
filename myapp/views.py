@@ -3,10 +3,12 @@ import mysql.connector as sql
 from django.http import HttpResponse
 from datetime import datetime
 from datetime import date
+import random
 current_date1 = date.today()
-
 now = datetime.now()
 current_time1 = now.strftime("%H:%M:%S")
+
+projectid = random.randint(0,99999999999)
 
 name ='' 
 sapid=''
@@ -49,7 +51,6 @@ filledslot=''
 tpassword='' 
 temail=''
 filledslot=''
-
 
 
 # Create your views here.
@@ -204,11 +205,12 @@ def editaction(request):
 
 
 def senddetails(request):
-    global FEmailid, projecttitle, message, member1, member2, member3, member4, member5
+    global FEmailid, projecttitle, message, member1, member2, member3, member4, member5, projectid
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
         d=request.POST
+        
         for key,value in d.items():
             if key=="FEmailid":
                 FEmailid=value
@@ -227,7 +229,7 @@ def senddetails(request):
             if key =="member5":
                 member5=value
             
-        c = "insert into newrequest values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
+        c = "insert into newrequest values('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(projectid,FEmailid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
         cursor.execute(c)
         m.commit()
     return render(request, 'sendDetails.html')
@@ -302,17 +304,11 @@ def homeaction(request):
     return render(request, "Home.html", data1)
 
 
-
-
-
-
-
-
 ####################################################################################################################
                              #### Teacher profile works  ####
 
 def loginactionteacher(request):
-    global id, password, FEmailid1
+    global id, password, FEmailid1, id1
     if request.method=="POST":
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
@@ -387,11 +383,10 @@ def slotaccepted(request):
 
 
 def teacherhomeaction(request):
-        global id1, id
+        global id
         m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
         cursor=m.cursor()
         d=request.POST
-        
         c = "select * from teacher where id='{}'".format(id)
         cursor.execute(c)
         t1=tuple(cursor.fetchall())
@@ -477,3 +472,74 @@ def teachereditrequest(request):
             m.commit()
        
     return render(request, 'teacher_editprofile.html')
+
+
+
+def teacheracceptrequest(request):
+    global tname, tdept, tphoneno, officeno, totalslot, filledslot, tpassword, temail, FEmailid1, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1, projectid1
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key == "projectid1":
+                projectid1=value
+        c = "select * from newrequest where projectid='{}'".format(projectid1)
+        cursor.execute(c)
+        t1=tuple(cursor.fetchall())
+
+        projectid= t1[0][0]
+        FEmailid1 = t1[0][1]
+        projecttitle = t1[0][2] 
+        message = t1[0][3] 
+        member1 = t1[0][4] 
+        member2 = t1[0][5] 
+        member3 = t1[0][6] 
+        member4 = t1[0][7] 
+        member5 = t1[0][8] 
+        current_date1 = t1[0][9] 
+        current_time1 = t1[0][10]
+
+        c1 = "insert into accepted values('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid1, projectid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
+        cursor.execute(c1)
+        m.commit()
+      
+    return render(request, 'teacherAcceptProject.html')
+
+
+
+def teacherrejectrequest(request):
+    global tname, tdept, tphoneno, officeno, totalslot, filledslot, tpassword, temail, FEmailid1, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1, projectid1
+    if request.method=="POST":
+        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
+        cursor=m.cursor()
+        d=request.POST
+        for key,value in d.items():
+            if key == "projectid1":
+                projectid1=value
+        for key,value in d.items():
+            if key == "message":
+                message=value
+        c = "select * from newrequest where projectid='{}'".format(projectid1)
+        cursor.execute(c)
+        t1=tuple(cursor.fetchall())
+
+        projectid= t1[0][0]
+        FEmailid1 = t1[0][1]
+        projecttitle = t1[0][2] 
+        member1 = t1[0][4] 
+        member2 = t1[0][5] 
+        member3 = t1[0][6] 
+        member4 = t1[0][7] 
+        member5 = t1[0][8] 
+        current_date1 = t1[0][9] 
+        current_time1 = t1[0][10]
+
+        c2 = "insert into reject values('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid1, projectid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
+        cursor.execute(c2)
+        m.commit()
+      
+    return render(request, 'teacherRejectProject.html')
+
+
+
