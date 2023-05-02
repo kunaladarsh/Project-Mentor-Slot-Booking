@@ -5,7 +5,11 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/static/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
-   
+  <script>
+    function rejectinfo() {
+        alert("Message send Succesfully complete");
+       }
+ </script> 
 </head>
 <style>
     .booking-form {
@@ -112,7 +116,7 @@
       <label for="message">Message For Student: </label>
       <textarea id="message" name="message" ></textarea>
   <center>
-      <input type="submit" value="Send Message">
+      <input type="submit" onclick='rejectinfo()' value="Send Message">
 
     </center>
     </form>

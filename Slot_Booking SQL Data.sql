@@ -27,11 +27,11 @@ totalslot int(10),
 fillslot int(10));
 
 select * from teacher;
-INSERT INTO teacher (name, id, department, email, phoneNumber, office_number, password, totalslot, fillslot)
-VALUES ('John Smith', '123', 'Computer Science', '098765', '555-1234', 'C-205', 'password123', 4, 5);
 
 
-create table slotbooking(FEmailid varchar(50), 
+create table newrequest(
+projectid int(50),
+FEmailid varchar(50), 
 projecttitle varchar(100), 
 message varchar(300), 
 member1 varchar(50), 
@@ -42,4 +42,35 @@ member5 varchar(50),
 current_date1 varchar(50), 
 current_time1 varchar(50));
 
-select * from slotbooking
+select * from newrequest;
+
+
+create table accepted(
+FEmailid varchar(50),
+projectid varchar(50) primary key,
+projecttitle varchar(100), 
+message varchar(300), 
+member1 varchar(50), 
+member2 varchar(50), 
+member3 varchar(50), 
+member4 varchar(50), 
+member5 varchar(50), 
+current_date1 varchar(50), 
+current_time1 varchar(50));
+select * from accepted;
+
+
+create table reject(
+FEmailid varchar(50),
+projectid varchar(50),
+projecttitle varchar(100), 
+message varchar(300), 
+member1 varchar(50), 
+member2 varchar(50), 
+member3 varchar(50), 
+member4 varchar(50), 
+member5 varchar(50), 
+current_date1 varchar(50), 
+current_time1 varchar(50));
+
+select * from reject;

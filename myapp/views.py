@@ -367,7 +367,7 @@ def slotaccepted(request):
     m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
     cursor=m.cursor()
     d=request.POST
-    c = "select * from accepted"
+    c = "select * from accepted where FEmailid='{}'".format(FEmailid1)
     cursor.execute(c)
     t=tuple(cursor.fetchall())
     print(t)
@@ -502,6 +502,8 @@ def teacheracceptrequest(request):
 
         c1 = "insert into accepted values('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid1, projectid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
         cursor.execute(c1)
+        c3 = "Delete from newrequest where projectid='{}'".format(projectid1)
+        cursor.execute(c3)
         m.commit()
       
     return render(request, 'teacherAcceptProject.html')
@@ -537,7 +539,10 @@ def teacherrejectrequest(request):
 
         c2 = "insert into reject values('{}','{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}')".format(FEmailid1, projectid, projecttitle, message, member1, member2, member3, member4, member5, current_date1, current_time1)
         cursor.execute(c2)
+        c3 = "Delete from newrequest where projectid='{}'".format(projectid1)
+        cursor.execute(c3)
         m.commit()
+
       
     return render(request, 'teacherRejectProject.html')
 

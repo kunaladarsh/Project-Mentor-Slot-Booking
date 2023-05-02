@@ -123,7 +123,7 @@ input[type="submit"] {
 
 
 
-			<label for="password" onclick="matchPassword()">Password:</label>
+			<label for="password">Password:</label>
 			<input type="password" id="password" name="password" placeholder="Enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
 
@@ -131,7 +131,7 @@ input[type="submit"] {
 			<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
 			<br>
-			<input type="submit" onclick="msg" value="Sign Up">
+			<input type="submit" onclick="signupmessage()" value="Sign Up">
 			
 		</form>
 		<br>

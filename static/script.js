@@ -11,16 +11,19 @@ if (usernameInput.value === '' || passwordInput.value === '') {
   }  
 });
 
+function signupmessage() {
+  alert("SignUp Succesfully Complete...Thank You For SignUp");
+}
 
 function msgpers() {
-  alert("Personal Details Update Succesfull");
+  alert("Personal Details Update Succesfully");
 }
 
 function msgproj() {
-  alert("project Details Update Succesfull");
+  alert("project Details Update Succesfully");
 }
 
 
 function msgpass() {
-  alert("password Update Succesfull");
+  alert("password Update Succesfully");
 }
