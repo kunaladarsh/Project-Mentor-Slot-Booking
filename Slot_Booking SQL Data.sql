@@ -2,7 +2,7 @@ create database MentorSlotBooking;
 use MentorSlotBooking;
 
 create table signup1(name varchar(50), 
-sapid varchar(50), 
+sapid varchar(50) primary key, 
 roll varchar(50),
 dept varchar(50),
 proj varchar(50), 
@@ -17,7 +17,7 @@ cpassword varchar(50));
 select *from Signup1 
 
 create table teacher(name varchar(50), 
-id varchar(50), 
+id varchar(50) primary key, 
 department varchar(50),
 email varchar(50), 
 phoneNumber varchar(50), 
@@ -30,7 +30,7 @@ select * from teacher;
 
 
 create table newrequest(
-projectid int(50),
+projectid int(50) primary key,
 FEmailid varchar(50), 
 projecttitle varchar(100), 
 message varchar(300), 
@@ -62,7 +62,7 @@ select * from accepted;
 
 create table reject(
 FEmailid varchar(50),
-projectid varchar(50),
+projectid varchar(50) primary key,
 projecttitle varchar(100), 
 message varchar(300), 
 member1 varchar(50), 
