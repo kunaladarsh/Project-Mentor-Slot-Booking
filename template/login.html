@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Mentor Slot Booking{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+    
+    .login-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        overflow: hidden;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .login-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 2rem;
+        text-align: center;
+        color: white;
+    }
+    
+    .login-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .login-body {
+        padding: 2rem;
+    }
+    
+    .form-floating {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-floating input {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 1rem 0.75rem;
+    }
+    
+    .form-floating label {
+        padding: 1rem 0.75rem;
+    }
+    
+    .remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .remember-me input {
+        margin-right: 0.5rem;
+    }
+    
+    .social-login {
+        margin-top: 2rem;
+        text-align: center;
+    }
+    
+    .social-login p {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    
+    .social-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: transform 0.3s ease;
+    }
+    
+    .social-btn:hover {
+        transform: translateY(-3px);
+    }
+    
+    .social-btn.google {
+        background-color: #db4437;
+    }
+    
+    .social-btn.facebook {
+        background-color: #4267B2;
+    }
+    
+    .social-btn.github {
+        background-color: #333;
+    }
+    
+    .signup-link {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+    
+    .signup-link a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .signup-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card fade-in">
+        <div class="login-header">
+            <h1>Welcome Back</h1>
+            <p>Please login to your account</p>
+        </div>
+        
+        <div class="login-body">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="sap_id" name="sap_id" placeholder="SAP ID" required>
+                    <label for="sap_id">SAP ID</label>
+                    <div class="invalid-feedback">
+                        Please enter your SAP ID
+                    </div>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="password">Password</label>
+                    <div class="invalid-feedback">
+                        Please enter your password
+                    </div>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                    <label class="form-check-label" for="remember">Remember me</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </button>
+            </form>
+            
+            <div class="social-login">
+                <p>Or login with</p>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn google" data-bs-toggle="tooltip" title="Login with Google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="#" class="social-btn facebook" data-bs-toggle="tooltip" title="Login with Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-btn github" data-bs-toggle="tooltip" title="Login with GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="signup-link">
+                <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+</script>
+{% endblock %} 

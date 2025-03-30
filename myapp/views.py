@@ -1,9 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.http import HttpResponse
 from datetime import datetime
 from datetime import date
 import random
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib import messages
+from .models import Student, Mentor, Slot, Booking
+from .services import SlotBookingService, MentorService, StudentService
+from django.contrib.auth import authenticate, login, logout
+from .db_utils import DatabaseManager
+
 current_date1 = date.today()
 now = datetime.now()
 current_time1 = now.strftime("%H:%M:%S")
@@ -52,43 +61,151 @@ tpassword=''
 temail=''
 filledslot=''
 
+class StudentRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and isinstance(self.request.user, Student)
+
+class MentorRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and isinstance(self.request.user, Mentor)
+
+class StudentDashboardView(LoginRequiredMixin, StudentRequiredMixin, ListView):
+    model = Booking
+    template_name = 'student/dashboard.html'
+    context_object_name = 'bookings'
+
+    def get_queryset(self):
+        return StudentService.get_student_bookings(self.request.user)
+
+class MentorDashboardView(LoginRequiredMixin, MentorRequiredMixin, ListView):
+    model = Booking
+    template_name = 'mentor/dashboard.html'
+    context_object_name = 'pending_requests'
+
+    def get_queryset(self):
+        return MentorService.get_pending_requests(self.request.user)
+
+class CreateSlotView(LoginRequiredMixin, MentorRequiredMixin, CreateView):
+    model = Slot
+    template_name = 'mentor/create_slot.html'
+    fields = ['date', 'start_time', 'end_time']
+    success_url = reverse_lazy('mentor_dashboard')
+
+    def form_valid(self, form):
+        form.instance.mentor = self.request.user
+        return super().form_valid(form)
+
+class BookSlotView(LoginRequiredMixin, StudentRequiredMixin, CreateView):
+    model = Booking
+    template_name = 'student/book_slot.html'
+    fields = ['slot']
+    success_url = reverse_lazy('student_dashboard')
+
+    def form_valid(self, form):
+        form.instance.student = self.request.user
+        booking, message = SlotBookingService.book_slot(
+            self.request.user,
+            form.cleaned_data['slot']
+        )
+        if booking:
+            messages.success(self.request, message)
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, message)
+            return self.form_invalid(form)
+
+class UpdateProjectView(LoginRequiredMixin, StudentRequiredMixin, UpdateView):
+    model = Student
+    template_name = 'student/update_project.html'
+    fields = ['project_title', 'project_description']
+    success_url = reverse_lazy('student_dashboard')
+
+    def get_object(self):
+        return self.request.user
+
+class AcceptBookingView(LoginRequiredMixin, MentorRequiredMixin, UpdateView):
+    model = Booking
+    template_name = 'mentor/accept_booking.html'
+    fields = []
+    success_url = reverse_lazy('mentor_dashboard')
+
+    def form_valid(self, form):
+        if self.object.accept():
+            messages.success(self.request, "Booking request accepted successfully")
+        else:
+            messages.error(self.request, "Could not accept the booking request")
+        return super().form_valid(form)
+
+class RejectBookingView(LoginRequiredMixin, MentorRequiredMixin, UpdateView):
+    model = Booking
+    template_name = 'mentor/reject_booking.html'
+    fields = []
+    success_url = reverse_lazy('mentor_dashboard')
+
+    def form_valid(self, form):
+        if self.object.reject():
+            messages.success(self.request, "Booking request rejected successfully")
+        else:
+            messages.error(self.request, "Could not reject the booking request")
+        return super().form_valid(form)
+
+# Authentication views
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            if isinstance(user, Student):
+                return redirect('student_dashboard')
+            else:
+                return redirect('mentor_dashboard')
+        else:
+            messages.error(request, "Invalid username or password")
+    return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 # Create your views here.
 def signupaction(request):
-    global name, sapid, roll, dept, proj,semester,pyear,tproject,contact,mentorn, password, cpassword
-    if request.method=="POST":
-        m = sql.connect(user="root",password="adarshkunal", host="localhost", database="MentorSlotBooking", auth_plugin='mysql_native_password')
-        cursor=m.cursor()
-        d=request.POST
-        for key,value in d.items():
-            if key=="name":
-                name=value
-            if key == "sapid":
-                sapid=value
-            if key =="rollno":
-                roll=value
-            if key=="dept":
-                dept=value
-            if key =="semester":
-                semester=value
-            if key =="pyear":
-                pyear=value
-            if key =="tproject":
-                tproject=value                
-            if key =="project":
-                proj=value
-            if key == "contact":
-                contact=value            
-            if key == "mentorn":
-                mentorn=value
-            if key =="password":
-                password=value
-            if key =="confirmpassword":
-                cpassword=value
-   
-        c = "insert into signup1 values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}','{}', '{}', '{}')".format( name, sapid, roll, dept, proj, semester, pyear, tproject, contact, mentorn, password, cpassword)
-        cursor.execute(c)
-        m.commit()
+    if request.method == "POST":
+        db = DatabaseManager.get_instance()
+        data = request.POST
+        
+        # Prepare the data
+        values = (
+            data.get('name', ''),
+            data.get('sapid', ''),
+            data.get('rollno', ''),
+            data.get('dept', ''),
+            data.get('project', ''),
+            data.get('semester', ''),
+            data.get('pyear', ''),
+            data.get('tproject', ''),
+            data.get('contact', ''),
+            data.get('mentorn', ''),
+            data.get('password', ''),
+            data.get('confirmpassword', '')
+        )
+        
+        # Use parameterized query for security
+        query = """
+            INSERT INTO signup1 
+            (name, sapid, roll, dept, proj, semester, pyear, tproject, contact, mentorn, password, cpassword)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        
+        try:
+            db.execute_query(query, values)
+            messages.success(request, "Registration successful!")
+            return redirect('login')
+        except Exception as e:
+            messages.error(request, f"Registration failed: {str(e)}")
+            return render(request, 'signup_page.html')
+            
     return render(request, 'signup_page.html')
 
 
@@ -185,7 +302,7 @@ def editaction(request):
         if contactNo1 !="":
             c = "update signup1 set contact='"+contactNo1+"' where sapid='"+sapid+"'"
             cursor.execute(c)
-            m.commit()
+            cursor.execute(c)
         if mentor1 !="":
             c = "update signup1 set mentorn='"+mentor1+"' where sapid='"+sapid+"'"
             cursor.execute(c)

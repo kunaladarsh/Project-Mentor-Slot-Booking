@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Slot - Mentor Slot Booking{% endblock %}
+
+{% block extra_css %}
+<style>
+    .create-slot-container {
+        padding: 2rem 0;
+    }
+    
+    .create-slot-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .create-slot-header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .slot-form {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .form-section {
+        margin-bottom: 2rem;
+    }
+    
+    .form-section:last-child {
+        margin-bottom: 0;
+    }
+    
+    .form-section h4 {
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #eee;
+    }
+    
+    .form-floating {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-floating input, .form-floating select {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 1rem 0.75rem;
+    }
+    
+    .form-floating label {
+        padding: 1rem 0.75rem;
+    }
+    
+    .time-range {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .duration-selector {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .duration-option {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .duration-option:hover {
+        border-color: var(--primary-color);
+    }
+    
+    .duration-option.selected {
+        border-color: var(--primary-color);
+        background-color: rgba(74, 144, 226, 0.1);
+    }
+    
+    .duration-option i {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .recurring-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .recurring-option {
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .recurring-option:hover {
+        border-color: var(--primary-color);
+    }
+    
+    .recurring-option.selected {
+        border-color: var(--primary-color);
+        background-color: rgba(74, 144, 226, 0.1);
+    }
+    
+    .recurring-option i {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .weekly-selector {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .day-option {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .day-option:hover {
+        border-color: var(--primary-color);
+    }
+    
+    .day-option.selected {
+        border-color: var(--primary-color);
+        background-color: rgba(74, 144, 226, 0.1);
+    }
+    
+    .btn-create {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    
+    .btn-create:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-create:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="create-slot-container">
+    <div class="create-slot-header fade-in">
+        <h1>Create New Slot</h1>
+        <p>Set up your availability for mentoring sessions</p>
+    </div>
+    
+    <div class="slot-form fade-in">
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <div class="form-section">
+                <h4>Basic Information</h4>
+                
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="date" name="date" required>
+                    <label for="date">Date</label>
+                    <div class="invalid-feedback">
+                        Please select a date
+                    </div>
+                </div>
+                
+                <div class="time-range">
+                    <div class="form-floating">
+                        <input type="time" class="form-control" id="start_time" name="start_time" required>
+                        <label for="start_time">Start Time</label>
+                        <div class="invalid-feedback">
+                            Please select a start time
+                        </div>
+                    </div>
+                    
+                    <div class="form-floating">
+                        <input type="time" class="form-control" id="end_time" name="end_time" required>
+                        <label for="end_time">End Time</label>
+                        <div class="invalid-feedback">
+                            Please select an end time
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="duration-selector">
+                    <div class="duration-option" data-duration="30">
+                        <i class="fas fa-clock"></i>
+                        <h5>30 Minutes</h5>
+                    </div>
+                    <div class="duration-option" data-duration="60">
+                        <i class="fas fa-hourglass-half"></i>
+                        <h5>1 Hour</h5>
+                    </div>
+                    <div class="duration-option" data-duration="90">
+                        <i class="fas fa-hourglass-end"></i>
+                        <h5>1.5 Hours</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h4>Recurring Options</h4>
+                
+                <div class="recurring-options">
+                    <div class="recurring-option" data-recurring="none">
+                        <i class="fas fa-calendar-day"></i>
+                        <h5>One-time</h5>
+                    </div>
+                    <div class="recurring-option" data-recurring="daily">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h5>Daily</h5>
+                    </div>
+                    <div class="recurring-option" data-recurring="weekly">
+                        <i class="fas fa-calendar-week"></i>
+                        <h5>Weekly</h5>
+                    </div>
+                </div>
+                
+                <div class="weekly-selector" style="display: none;">
+                    <div class="day-option" data-day="0">Sun</div>
+                    <div class="day-option" data-day="1">Mon</div>
+                    <div class="day-option" data-day="2">Tue</div>
+                    <div class="day-option" data-day="3">Wed</div>
+                    <div class="day-option" data-day="4">Thu</div>
+                    <div class="day-option" data-day="5">Fri</div>
+                    <div class="day-option" data-day="6">Sat</div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h4>Additional Information</h4>
+                
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="max_students" name="max_students" min="1" value="1" required>
+                    <label for="max_students">Maximum Students</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid number
+                    </div>
+                </div>
+                
+                <div class="form-floating">
+                    <textarea class="form-control" id="description" name="description" style="height: 100px"></textarea>
+                    <label for="description">Description (Optional)</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-create">
+                <i class="fas fa-calendar-plus me-2"></i>Create Slot
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Duration selection
+    const durationOptions = document.querySelectorAll('.duration-option');
+    const startTime = document.getElementById('start_time');
+    const endTime = document.getElementById('end_time');
+    
+    durationOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            durationOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            const duration = parseInt(this.dataset.duration);
+            const start = new Date(`1970-01-01T${startTime.value}`);
+            const end = new Date(start.getTime() + duration * 60000);
+            endTime.value = end.toTimeString().slice(0, 5);
+        });
+    });
+    
+    // Recurring options
+    const recurringOptions = document.querySelectorAll('.recurring-option');
+    const weeklySelector = document.querySelector('.weekly-selector');
+    
+    recurringOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            recurringOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            weeklySelector.style.display = this.dataset.recurring === 'weekly' ? 'grid' : 'none';
+        });
+    });
+    
+    // Weekly day selection
+    const dayOptions = document.querySelectorAll('.day-option');
+    
+    dayOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+    });
+    
+    // Time validation
+    function validateTime() {
+        const start = new Date(`1970-01-01T${startTime.value}`);
+        const end = new Date(`1970-01-01T${endTime.value}`);
+        
+        if (end <= start) {
+            endTime.setCustomValidity('End time must be after start time');
+        } else {
+            endTime.setCustomValidity('');
+        }
+    }
+    
+    startTime.addEventListener('change', validateTime);
+    endTime.addEventListener('change', validateTime);
+    
+    // Date validation
+    const dateInput = document.getElementById('date');
+    dateInput.addEventListener('change', function() {
+        const selectedDate = new Date(this.value);
+        const today = new Date();
+        
+        if (selectedDate < today) {
+            this.setCustomValidity('Please select a future date');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+    
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,486 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Slot - Mentor Slot Booking{% endblock %}
+
+{% block extra_css %}
+<style>
+    .booking-container {
+        padding: 2rem 0;
+    }
+    
+    .booking-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .booking-header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .booking-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .mentor-list {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .mentor-list .card-header {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+    }
+    
+    .mentor-item {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .mentor-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .mentor-item.selected {
+        background-color: rgba(74, 144, 226, 0.1);
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .mentor-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .mentor-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    
+    .mentor-details h5 {
+        margin-bottom: 0.25rem;
+        color: var(--secondary-color);
+    }
+    
+    .mentor-details p {
+        color: #666;
+        margin-bottom: 0;
+    }
+    
+    .slot-calendar {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .slot-calendar .card-header {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .calendar-day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .calendar-day:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .calendar-day.selected {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .calendar-day.disabled {
+        background-color: #f8f9fa;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+    
+    .calendar-day.has-slots {
+        border: 2px solid var(--success-color);
+    }
+    
+    .time-slots {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .time-slots .card-header {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+    }
+    
+    .time-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .time-slot {
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .time-slot:hover {
+        border-color: var(--primary-color);
+        background-color: #f8f9fa;
+    }
+    
+    .time-slot.selected {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+    
+    .time-slot.booked {
+        background-color: #f8f9fa;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+    
+    .booking-summary {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .booking-summary h4 {
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+    
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        color: #666;
+    }
+    
+    .summary-item:last-child {
+        margin-bottom: 0;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        font-weight: 600;
+        color: var(--secondary-color);
+    }
+    
+    .btn-book {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    .btn-book:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-book:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <div class="booking-header fade-in">
+        <h1>Book a Mentor Slot</h1>
+        <p>Select a mentor and choose your preferred time slot</p>
+    </div>
+    
+    <div class="booking-grid">
+        <div class="mentor-list fade-in">
+            <div class="card-header">
+                <h4 class="mb-0">Available Mentors</h4>
+            </div>
+            <div class="mentor-list-body">
+                {% for mentor in mentors %}
+                    <div class="mentor-item" data-mentor-id="{{ mentor.id }}">
+                        <div class="mentor-info">
+                            <div class="mentor-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="mentor-details">
+                                <h5>{{ mentor.get_full_name }}</h5>
+                                <p>{{ mentor.department }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="slot-calendar fade-in">
+            <div class="card-header">
+                <h4 class="mb-0">Select Date</h4>
+                <div class="calendar-nav">
+                    <button class="btn btn-light btn-sm" id="prevMonth">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="currentMonth">Month Year</span>
+                    <button class="btn btn-light btn-sm" id="nextMonth">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar days will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="time-slots fade-in">
+            <div class="card-header">
+                <h4 class="mb-0">Select Time</h4>
+            </div>
+            <div class="time-grid" id="timeGrid">
+                <!-- Time slots will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="booking-summary fade-in">
+        <h4>Booking Summary</h4>
+        <div class="summary-item">
+            <span>Mentor:</span>
+            <span id="summaryMentor">Not selected</span>
+        </div>
+        <div class="summary-item">
+            <span>Date:</span>
+            <span id="summaryDate">Not selected</span>
+        </div>
+        <div class="summary-item">
+            <span>Time:</span>
+            <span id="summaryTime">Not selected</span>
+        </div>
+        <div class="summary-item">
+            <span>Duration:</span>
+            <span>30 minutes</span>
+        </div>
+        <button class="btn btn-book" id="bookButton" disabled>
+            <i class="fas fa-calendar-check me-2"></i>Confirm Booking
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mentor selection
+    const mentorItems = document.querySelectorAll('.mentor-item');
+    let selectedMentor = null;
+    
+    mentorItems.forEach(item => {
+        item.addEventListener('click', function() {
+            mentorItems.forEach(i => i.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedMentor = this.dataset.mentorId;
+            updateSummary();
+        });
+    });
+    
+    // Calendar functionality
+    let currentDate = new Date();
+    let selectedDate = null;
+    
+    function updateCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        document.getElementById('currentMonth').textContent = 
+            new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+        
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        
+        const calendarGrid = document.getElementById('calendarGrid');
+        calendarGrid.innerHTML = '';
+        
+        // Add empty cells for days before the first day of the month
+        for (let i = 0; i < firstDay.getDay(); i++) {
+            calendarGrid.appendChild(createDayElement(''));
+        }
+        
+        // Add days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const date = new Date(year, month, day);
+            const dayElement = createDayElement(day, date);
+            
+            if (date < new Date()) {
+                dayElement.classList.add('disabled');
+            } else {
+                // Check if the day has available slots
+                // This would be replaced with actual data from the backend
+                if (Math.random() > 0.5) {
+                    dayElement.classList.add('has-slots');
+                }
+            }
+            
+            calendarGrid.appendChild(dayElement);
+        }
+    }
+    
+    function createDayElement(day, date = null) {
+        const div = document.createElement('div');
+        div.className = 'calendar-day';
+        div.textContent = day;
+        
+        if (!day) {
+            div.classList.add('disabled');
+            return div;
+        }
+        
+        if (date) {
+            div.addEventListener('click', function() {
+                if (!this.classList.contains('disabled')) {
+                    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedDate = date;
+                    updateSummary();
+                    loadTimeSlots(date);
+                }
+            });
+        }
+        
+        return div;
+    }
+    
+    // Time slots functionality
+    function loadTimeSlots(date) {
+        const timeGrid = document.getElementById('timeGrid');
+        timeGrid.innerHTML = '';
+        
+        // Generate time slots from 9 AM to 5 PM
+        for (let hour = 9; hour < 17; hour++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                const slot = createTimeSlot(time);
+                timeGrid.appendChild(slot);
+            }
+        }
+    }
+    
+    function createTimeSlot(time) {
+        const div = document.createElement('div');
+        div.className = 'time-slot';
+        div.textContent = time;
+        
+        // Randomly mark some slots as booked
+        if (Math.random() > 0.7) {
+            div.classList.add('booked');
+            return div;
+        }
+        
+        div.addEventListener('click', function() {
+            if (!this.classList.contains('booked')) {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                updateSummary();
+            }
+        });
+        
+        return div;
+    }
+    
+    // Summary update
+    function updateSummary() {
+        const mentorElement = document.getElementById('summaryMentor');
+        const dateElement = document.getElementById('summaryDate');
+        const timeElement = document.getElementById('summaryTime');
+        const bookButton = document.getElementById('bookButton');
+        
+        if (selectedMentor) {
+            const mentorItem = document.querySelector(`[data-mentor-id="${selectedMentor}"]`);
+            mentorElement.textContent = mentorItem.querySelector('h5').textContent;
+        }
+        
+        if (selectedDate) {
+            dateElement.textContent = selectedDate.toLocaleDateString('default', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        const selectedTimeSlot = document.querySelector('.time-slot.selected');
+        if (selectedTimeSlot) {
+            timeElement.textContent = selectedTimeSlot.textContent;
+        }
+        
+        bookButton.disabled = !(selectedMentor && selectedDate && selectedTimeSlot);
+    }
+    
+    // Calendar navigation
+    document.getElementById('prevMonth').addEventListener('click', function() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateCalendar();
+    });
+    
+    document.getElementById('nextMonth').addEventListener('click', function() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateCalendar();
+    });
+    
+    // Initialize calendar
+    updateCalendar();
+});
+</script>
+{% endblock %} 

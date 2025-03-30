@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up - Mentor Slot Booking{% endblock %}
+
+{% block extra_css %}
+<style>
+    .signup-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+    
+    .signup-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        overflow: hidden;
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .signup-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 2rem;
+        text-align: center;
+        color: white;
+    }
+    
+    .signup-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .signup-body {
+        padding: 2rem;
+    }
+    
+    .form-floating {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-floating input, .form-floating select {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 1rem 0.75rem;
+    }
+    
+    .form-floating label {
+        padding: 1rem 0.75rem;
+    }
+    
+    .user-type-selector {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .user-type-option {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .user-type-option:hover {
+        border-color: var(--primary-color);
+    }
+    
+    .user-type-option.selected {
+        border-color: var(--primary-color);
+        background-color: rgba(74, 144, 226, 0.1);
+    }
+    
+    .user-type-option i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+    
+    .password-requirements {
+        font-size: 0.875rem;
+        color: #666;
+        margin-top: 0.5rem;
+    }
+    
+    .password-requirements ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+    
+    .password-requirements li {
+        margin-bottom: 0.25rem;
+    }
+    
+    .password-requirements li.valid {
+        color: var(--success-color);
+    }
+    
+    .password-requirements li.valid i {
+        margin-right: 0.5rem;
+    }
+    
+    .login-link {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+    
+    .login-link a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="signup-card fade-in">
+        <div class="signup-header">
+            <h1>Create Account</h1>
+            <p>Join our mentor slot booking system</p>
+        </div>
+        
+        <div class="signup-body">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="user-type-selector">
+                    <div class="user-type-option" data-type="student">
+                        <i class="fas fa-user-graduate"></i>
+                        <h5>Student</h5>
+                        <p class="mb-0">Book slots with mentors</p>
+                    </div>
+                    <div class="user-type-option" data-type="mentor">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h5>Mentor</h5>
+                        <p class="mb-0">Create and manage slots</p>
+                    </div>
+                </div>
+                
+                <input type="hidden" name="user_type" id="user_type" required>
+                
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Full Name" required>
+                    <label for="full_name">Full Name</label>
+                    <div class="invalid-feedback">
+                        Please enter your full name
+                    </div>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="sap_id" name="sap_id" placeholder="SAP ID" required>
+                    <label for="sap_id">SAP ID</label>
+                    <div class="invalid-feedback">
+                        Please enter your SAP ID
+                    </div>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <label for="email">Email</label>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address
+                    </div>
+                </div>
+                
+                <div class="form-floating student-field">
+                    <input type="text" class="form-control" id="roll_number" name="roll_number" placeholder="Roll Number">
+                    <label for="roll_number">Roll Number</label>
+                </div>
+                
+                <div class="form-floating">
+                    <select class="form-select" id="department" name="department" required>
+                        <option value="">Select Department</option>
+                        <option value="CSE">Computer Science</option>
+                        <option value="ECE">Electronics</option>
+                        <option value="ME">Mechanical</option>
+                        <option value="CE">Civil</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="EE">Electrical</option>
+                    </select>
+                    <label for="department">Department</label>
+                    <div class="invalid-feedback">
+                        Please select your department
+                    </div>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="password">Password</label>
+                    <div class="password-requirements">
+                        <ul>
+                            <li id="length"><i class="fas fa-times"></i> At least 8 characters</li>
+                            <li id="uppercase"><i class="fas fa-times"></i> One uppercase letter</li>
+                            <li id="lowercase"><i class="fas fa-times"></i> One lowercase letter</li>
+                            <li id="number"><i class="fas fa-times"></i> One number</li>
+                            <li id="special"><i class="fas fa-times"></i> One special character</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    <label for="confirm_password">Confirm Password</label>
+                    <div class="invalid-feedback">
+                        Passwords do not match
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-user-plus me-2"></i>Sign Up
+                </button>
+            </form>
+            
+            <div class="login-link">
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // User type selection
+    const userTypeOptions = document.querySelectorAll('.user-type-option');
+    const userTypeInput = document.getElementById('user_type');
+    const studentFields = document.querySelectorAll('.student-field');
+    
+    userTypeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            userTypeOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            userTypeInput.value = this.dataset.type;
+            
+            // Show/hide student fields
+            studentFields.forEach(field => {
+                field.style.display = this.dataset.type === 'student' ? 'block' : 'none';
+            });
+        });
+    });
+    
+    // Password validation
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
+    
+    function validatePassword() {
+        const value = password.value;
+        
+        // Update requirements
+        document.getElementById('length').classList.toggle('valid', value.length >= 8);
+        document.getElementById('uppercase').classList.toggle('valid', /[A-Z]/.test(value));
+        document.getElementById('lowercase').classList.toggle('valid', /[a-z]/.test(value));
+        document.getElementById('number').classList.toggle('valid', /[0-9]/.test(value));
+        document.getElementById('special').classList.toggle('valid', /[^A-Za-z0-9]/.test(value));
+        
+        // Update icons
+        document.querySelectorAll('.password-requirements li').forEach(li => {
+            const icon = li.querySelector('i');
+            icon.className = li.classList.contains('valid') ? 'fas fa-check' : 'fas fa-times';
+        });
+        
+        // Validate password match
+        if (confirmPassword.value) {
+            confirmPassword.setCustomValidity(value !== confirmPassword.value ? 'Passwords do not match' : '');
+        }
+    }
+    
+    password.addEventListener('input', validatePassword);
+    confirmPassword.addEventListener('input', validatePassword);
+});
+</script>
+{% endblock %} 
